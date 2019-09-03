@@ -73,6 +73,19 @@ server.post('/api/movies', (req, res) => {
 	res.status(201).json(movies);
 });
 
+// delete movies
+server.delete('/api/movies/:id', (req, res) => {
+  const id = req.params.id
+  
+  movies = movies.filter(m => m.id !== Number(id))
+
+  res.status(200).json(movies)
+})
+
+// list of movies for a particular rating
+
+
+
 // actors
 server.get('/api/actors', (req, res) => {
 	res.status(200).json(actors);
