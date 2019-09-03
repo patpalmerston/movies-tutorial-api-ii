@@ -58,8 +58,15 @@ server.get('/', (req, res) => {
 });
 
 // movies
+// test query string: localhost:8000/api/moives?minrating=4
 server.get('/api/movies', (req, res) => {
-	res.status(200).json(movies);
+	const minRating = req.query.minrating;
+	// if the client provides a minrating, filter the response
+	let result = [...movies];
+	if (minRating) {
+		result = movies.filter(m => m.rating >= minRating);
+	}
+	res.status(200).json(result);
 });
 
 server.post('/api/movies', (req, res) => {
@@ -75,16 +82,14 @@ server.post('/api/movies', (req, res) => {
 
 // delete movies
 server.delete('/api/movies/:id', (req, res) => {
-  const id = req.params.id
-  
-  movies = movies.filter(m => m.id !== Number(id))
+	const id = req.params.id;
 
-  res.status(200).json(movies)
-})
+	movies = movies.filter(m => m.id !== Number(id));
+
+	res.status(200).json(movies);
+});
 
 // list of movies for a particular rating
-
-
 
 // actors
 server.get('/api/actors', (req, res) => {

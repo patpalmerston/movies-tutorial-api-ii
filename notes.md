@@ -29,3 +29,6 @@ Other Approaches to building Web API
 - gRPC
 - RPC
 - SOAP
+
+
+Query String
